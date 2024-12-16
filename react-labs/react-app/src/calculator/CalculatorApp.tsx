@@ -6,6 +6,11 @@ import CalculatorDisplay from './CalculatorDisplay';
 export default function CalculatorApp() {
 	let firstName = 'John';
 
+	// Callback, or event handler, or even a custom event handler
+	function handleButtonClick(buttonValue: string) {
+		console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
+	}
+
 	return (
 		<>
 			<h2>{firstName}'s Calculator</h2>
@@ -16,7 +21,7 @@ export default function CalculatorApp() {
 				{/* We'll come back to this in the afternoon */}
 				{/* <CalculatorButton>1</CalculatorButton> */}
 				{/* CalculatorButton[display="$"]*9 */}
-				<CalculatorButton className="one" display="1"></CalculatorButton>
+				<CalculatorButton onButtonClick={handleButtonClick} className="one" display="1"></CalculatorButton>
 				<CalculatorButton className="two" display="2"></CalculatorButton>
 				<CalculatorButton className="three" display="3"></CalculatorButton>
 				<CalculatorButton className="four" display="4"></CalculatorButton>

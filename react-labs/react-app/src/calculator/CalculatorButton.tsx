@@ -1,4 +1,3 @@
-
 /*
 export: Make this function available for import elsewhere
 default: import without curly braces, e.g.
@@ -14,13 +13,23 @@ CalculatorButton: The name of our function
 interface Props {
 	display: string;
 	className: string;
+	// A function with no arguments () and an ignored return value (void)
+	onButtonClick?: (display: string) => void;
 }
 
-export default function CalculatorButton({display, className}: Props) {
+export default function CalculatorButton({ display, className, onButtonClick }: Props) {
 	function handleClick() {
-		console.log(`You clicked the ${display} button`)
+		console.log(`CalculatorButton: You clicked the ${display} button`);
+		if (onButtonClick) onButtonClick(display);
 	}
 
-	return <button type="button" onClick={handleClick} className={className}>{display}</button>;
+	return (
+		<button
+			type="button"
+			onClick={handleClick}
+			className={className}
+		>
+			{display}
+		</button>
+	);
 }
-
