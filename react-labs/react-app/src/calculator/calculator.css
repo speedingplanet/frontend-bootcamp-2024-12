@@ -1,6 +1,27 @@
 .calculator {
+	/* 75 percent of the viewport */
+	width: 75vw;
+	border: 2px solid black;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(3, 1fr);
+	gap: 1px;
 }
 
+.calculator button {
+	padding: 4px 0;
+}
+
+.display {
+	/* Respects LTR/RTL settings */
+	padding-inline-end: 0.5em;
+	text-align: end;
+
+	/* Stretch from the first to the last grid track */
+	grid-column: 1 / -1;
+
+	/* Internally use flex for better layout */
+	display: flex;
+	align-self: center;
+	justify-content: end;
+}

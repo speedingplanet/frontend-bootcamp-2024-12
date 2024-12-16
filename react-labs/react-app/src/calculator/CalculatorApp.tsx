@@ -1,6 +1,7 @@
 import React from 'react';
 import './calculator.css';
 import CalculatorButton from './CalculatorButton';
+import CalculatorDisplay from './CalculatorDisplay';
 
 export default function CalculatorApp() {
 	let firstName = 'John';
@@ -10,6 +11,8 @@ export default function CalculatorApp() {
 			<h2>{firstName}'s Calculator</h2>
 			{/* div.calculator>button{$}*9 */}
 			<div className="calculator">
+				<CalculatorDisplay />
+
 				{/* We'll come back to this in the afternoon */}
 				{/* <CalculatorButton>1</CalculatorButton> */}
 				{/* CalculatorButton[display="$"]*9 */}

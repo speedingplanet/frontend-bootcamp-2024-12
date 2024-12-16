@@ -16,6 +16,10 @@ interface Props {
 }
 
 export default function CalculatorButton({display}: Props) {
-	return <button type="button">{display}</button>;
+	function handleClick() {
+		console.log(`You clicked the ${display} button`)
+	}
+
+	return <button type="button" onClick={handleClick}>{display}</button>;
 }
 
