@@ -1,7 +1,13 @@
-export default function CalculatorDisplay() {
+interface Props {
+	// Optional displayValue
+	displayValue?: string;
+}
+
+export default function CalculatorDisplay({ displayValue }: Props) {
 	return (
 		<div className="display">
-			<div>Calculator display placeholder</div>
+			{/* Print displayValue, unless it is null or undefined, then print zero */}
+			<div>{displayValue ?? 0}</div>
 		</div>
 	);
 }
