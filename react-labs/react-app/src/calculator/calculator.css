@@ -37,10 +37,10 @@
 .clear {
 	grid-area: clear;
 }
-.positive {
-	grid-area: positive;
+.positive-negative {
+	grid-area: positive-negative;
 }
--negative .percent {
+.percent {
 	grid-area: percent;
 }
 .division {
