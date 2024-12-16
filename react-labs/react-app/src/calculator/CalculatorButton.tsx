@@ -13,13 +13,14 @@ CalculatorButton: The name of our function
 
 interface Props {
 	display: string;
+	className: string;
 }
 
-export default function CalculatorButton({display}: Props) {
+export default function CalculatorButton({display, className}: Props) {
 	function handleClick() {
 		console.log(`You clicked the ${display} button`)
 	}
 
-	return <button type="button" onClick={handleClick}>{display}</button>;
+	return <button type="button" onClick={handleClick} className={className}>{display}</button>;
 }
 
