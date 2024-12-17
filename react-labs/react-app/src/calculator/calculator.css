@@ -1,101 +1,93 @@
-.calculator-root {
-	border: 4px black solid;
-
-	/* Make sure it doesn't shrink below a point */
-	height: max(350px, min(500px, 50vh));
-	width: max(450px, min(650px, 75vw));
-	font-size: 100%;
+.calculator {
+	/* 75 percent of the viewport */
+	width: 75vw;
+	border: 2px solid black;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(6, 1fr);
 
-	/* CSS Custom Properties  */
-	--bg-number: 88;
-	--bg-special: 33;
-	--bg-adjust: 20;
+	grid-template-areas:
+		'display display display display'
+		'clear positive-negative percent division'
+		'seven eight nine multiplication'
+		'four five six subtraction'
+		'one two three addition'
+		'zero zero decimal-point equals';
+
+	gap: 1px;
 }
 
-.calculator-button {
-	width: max(75px, 100%);
-	height: 100%;
-	min-height: fit-content;
-	color: white;
-	font-size: 200%;
-	border: 1px black solid;
-}
-
-.number {
-	/* 
-	This would be easy to do with hard-coded values; we want to demonstrate 
-	CSS custom properties in color values
-	*/
-	background-color: rgb(var(--bg-number) var(--bg-number) var(--bg-number));
-}
-
-.operator {
-	background-color: orange;
-}
-
-.special {
-	background-color: rgb(var(--bg-special) var(--bg-special) var(--bg-special));
-}
-
-.number:hover {
-	/* 
-	Overly complicated, but allows the hover value to always be relative to the
-	un-hovered value. Unfortunately, cannot get the background-color value live.
-
-	*/
-	background-color: rgb(
-		calc(var(--bg-number) + var(--bg-adjust)) calc(var(--bg-number) + var(--bg-adjust))
-			calc(var(--bg-number) + var(--bg-adjust))
-	);
-}
-
-.special:hover {
-	background-color: rgb(
-		calc(var(--bg-special) + var(--bg-adjust)) calc(var(--bg-special) + var(--bg-adjust))
-			calc(var(--bg-special) + var(--bg-adjust))
-	);
-}
-
-.operator:hover {
-	/* 
-	Demonstrating the "color from" syntax, creating a color 
-	relative to a color name
-	*/
-	background-color: rgb(
-		from orange calc(r + var(--bg-adjust)) calc(g + var(--bg-adjust)) calc(b + var(--bg-adjust))
-	);
+.calculator button {
+	padding: 4px 0;
 }
 
 .display {
-	grid-column: 1 / 5;
-	font-size: 200%;
-
-	/* Could have used "padding-right" but this will respect RTL/LTR settings */
+	/* Respects LTR/RTL settings */
 	padding-inline-end: 0.5em;
-
-	/* Similarly, could use "right" but this respects RTL/LTR settings */
 	text-align: end;
 
-	/* Center the readout vertically*/
+	grid-area: display;
+
+	/* Internally use flex for better layout */
 	display: flex;
-	align-items: center;
+	align-self: center;
 	justify-content: end;
 }
 
-.calculator-button.active-button {
-	background-color: green;
+.clear {
+	grid-area: clear;
 }
-
+.positive-negative {
+	grid-area: positive-negative;
+}
+.percent {
+	grid-area: percent;
+}
+.division {
+	grid-area: division;
+}
+.seven {
+	grid-area: seven;
+}
+.eight {
+	grid-area: eight;
+}
+.nine {
+	grid-area: nine;
+}
+.multiplication {
+	grid-area: multiplication;
+}
+.four {
+	grid-area: four;
+}
+.five {
+	grid-area: five;
+}
+.six {
+	grid-area: six;
+}
+.subtraction {
+	grid-area: subtraction;
+}
+.one {
+	grid-area: one;
+}
+.two {
+	grid-area: two;
+}
+.three {
+	grid-area: three;
+}
+.addition {
+	grid-area: addition;
+}
 .zero {
-	grid-column: 1 / 3;
+	grid-area: zero;
 }
-
-.disabled {
-	/* Inspired by Bootstrap */
-	pointer-events: none;
-  filter: none;
-  opacity: 0.65;
+.decimal-point {
+	grid-area: decimal-point;
+}
+.equals {
+	grid-area: equals;
 }

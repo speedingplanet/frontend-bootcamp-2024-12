@@ -1,233 +1,145 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
-import { noop } from 'lodash-es';
+import './calculator.css';
 import CalculatorButton from './CalculatorButton';
 import CalculatorDisplay from './CalculatorDisplay';
-import './calculator.css';
-import { mathOperators, LabelValues, MathOperator, OperationStack } from './calculator-types';
 
-function CalculatorApp() {
-	const [displayValue, setDisplayValue] = useState('');
-	const [overwrite, setOverwrite] = useState(false);
-	const [operationStack, setOperationStack] = useState<OperationStack | null>();
-	const [wasOperator, setWasOperator] = useState(false);
-	// console.log(`displayValue: ${displayValue}`)
+export default function CalculatorApp() {
+	// const [value, setter] = useState(initialValue)
+	const [displayValue, setDisplayValue] = useState('0');
 
-	function handleCalculatorButtonClick(buttonValue: LabelValues) {
+	let firstName = 'John';
 
-		// Tell TypeScript we think buttonValue is a MathOperator
-		if (mathOperators.includes(buttonValue as MathOperator)) {
-			handleOperator(buttonValue as MathOperator);
-		} else if (typeof buttonValue === 'string') {
-			setWasOperator(false);
-			if (overwrite) {
-				setOverwrite(false);
-				setDisplayValue(buttonValue);
-			} else {
-				setDisplayValue(displayValue + buttonValue);
-			}
-		}
-	}
+	// Callback, or event handler, or even a custom event handler
+	function handleButtonClick(buttonValue: string) {
+		console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
 
-	function clearDisplay() {
-		setDisplayValue('0');
-		setOperationStack(null);
-		setOverwrite(true);
-	}
-
-	function handleOperator(operator: MathOperator) {
-		if (!operationStack) {
-			setOperationStack([Number(displayValue), operator]);
-			setOverwrite(true);
-		} else if (wasOperator) {
-			setOperationStack([operationStack[0], operator]);
-		} else {
-			let [lValue, previousOperator] = operationStack;
-
-			let result = calculate(Number(lValue), previousOperator, Number(displayValue));
-			setDisplayValue(result + ''); // Converts result to a String
-			setOperationStack([result, operator]);
-			setOverwrite(true);
-			setWasOperator(true);
-		}
-	}
-
-	function handleDecimalPoint() {
-		if (displayValue.length === 0) {
-			setDisplayValue('0.');
-		} else if (!displayValue.includes('.')) {
-			handleCalculatorButtonClick('.');
-		}
-	}
-
-	function handleEquals() {
-		if (operationStack) {
-			let [lValue, operator] = operationStack;
-			let result = calculate(Number(lValue), operator, Number(displayValue));
-			setOperationStack(null);
-			setDisplayValue(result + '');
-			setOverwrite(true);
-			// console.log(`equals ${result}`)
-		}
-	}
-
-	function calculate(lValue: number, operator: MathOperator, rValue: number): number {
-		switch (operator) {
-			case '+':
-				return lValue + rValue;
+		/*
+		switch (buttonValue) {
+			case 'C':
+				setDisplayValue('');
+				break;
+			case '+/-':
+			case '%':
+			case '÷':
+			case '×':
 			case '-':
-				return lValue - rValue;
-			case '/':
-				return lValue / rValue;
-			case '*':
+			case '+':
+			case '.':
+			case '=':
+			case '0':
 			default:
-				return lValue * rValue;
+				// In this case "+" is the concatenation operator, not the addition operator
+				setDisplayValue(displayValue + buttonValue);
 		}
+				*/
 	}
 
 	return (
-		// section>div.display+div.button
-		<section className="calculator-root">
-			<div className="display">
-				<CalculatorDisplay value={displayValue} />
-			</div>
-			<div>
+		<>
+			<h2>{firstName}'s Calculator</h2>
+			{/* div.calculator>button{$}*9 */}
+			<div className="calculator">
+				<CalculatorDisplay displayValue={displayValue} />
+
+				{/* We'll come back to this in the afternoon */}
+				{/* <CalculatorButton>1</CalculatorButton> */}
+				{/* CalculatorButton[display="$"]*9 */}
 				<CalculatorButton
-					className="special"
-					label="clear"
-					onButtonClick={clearDisplay}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="one"
+					display="1"
+				></CalculatorButton>
 				<CalculatorButton
-					className="special"
-					label="+/-"
-					onButtonClick={noop}
-					disabled
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="two"
+					display="2"
+				></CalculatorButton>
 				<CalculatorButton
-					className="special"
-					label="%"
-					onButtonClick={noop}
-					disabled
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="three"
+					display="3"
+				></CalculatorButton>
 				<CalculatorButton
-					label="/"
-					onButtonClick={handleCalculatorButtonClick}
-					className={classNames('operator', { 'active-button': operationStack && operationStack[1] === '/' })}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="four"
+					display="4"
+				></CalculatorButton>
 				<CalculatorButton
-					label="7"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="five"
+					display="5"
+				></CalculatorButton>
 				<CalculatorButton
-					label="8"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="six"
+					display="6"
+				></CalculatorButton>
 				<CalculatorButton
-					label="9"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="seven"
+					display="7"
+				></CalculatorButton>
 				<CalculatorButton
-					label="*"
-					onButtonClick={handleCalculatorButtonClick}
-					className={classNames('operator', { 'active-button': operationStack && operationStack[1] === '*' })}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="eight"
+					display="8"
+				></CalculatorButton>
 				<CalculatorButton
-					label="4"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="nine"
+					display="9"
+				></CalculatorButton>
 				<CalculatorButton
-					label="5"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="zero"
+					display="0"
+				></CalculatorButton>
 				<CalculatorButton
-					label="6"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="decimal-point"
+					display="."
+				></CalculatorButton>
 				<CalculatorButton
-					label="-"
-					onButtonClick={handleCalculatorButtonClick}
-					className={classNames('operator', { 'active-button': operationStack && operationStack[1] === '-' })}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="equals"
+					display="="
+				></CalculatorButton>
 				<CalculatorButton
-					label="1"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="clear"
+					display="C"
+				></CalculatorButton>
 				<CalculatorButton
-					label="2"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="positive-negative"
+					display="+/-"
+				></CalculatorButton>
 				<CalculatorButton
-					label="3"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="percent"
+					display="%"
+				></CalculatorButton>
 				<CalculatorButton
-					label="+"
-					className={classNames('operator', { 'active-button': operationStack && operationStack[1] === '+' })}
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div className="zero">
+					onButtonClick={handleButtonClick}
+					className="division"
+					display="÷"
+				></CalculatorButton>
 				<CalculatorButton
-					label="0"
-					className="number"
-					onButtonClick={handleCalculatorButtonClick}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="multiplication"
+					display="×"
+				></CalculatorButton>
 				<CalculatorButton
-					label="."
-					className="number"
-					onButtonClick={handleDecimalPoint}
-				/>
-			</div>
-			<div>
+					onButtonClick={handleButtonClick}
+					className="addition"
+					display="+"
+				></CalculatorButton>
 				<CalculatorButton
-					label="="
-					className="operator"
-					onButtonClick={handleEquals}
-				/>
+					onButtonClick={handleButtonClick}
+					className="subtraction"
+					display="-"
+				></CalculatorButton>
 			</div>
-		</section>
+		</>
 	);
 }
-
-export default CalculatorApp;
