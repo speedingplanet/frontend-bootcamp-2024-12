@@ -13,7 +13,6 @@ export default function CalculatorApp() {
 	function handleButtonClick(buttonValue: string) {
 		console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
 
-		/*
 		switch (buttonValue) {
 			case 'C':
 				setDisplayValue('');
@@ -31,7 +30,6 @@ export default function CalculatorApp() {
 				// In this case "+" is the concatenation operator, not the addition operator
 				setDisplayValue(displayValue + buttonValue);
 		}
-				*/
 	}
 
 	return (
