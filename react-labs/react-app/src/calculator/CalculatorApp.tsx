@@ -3,6 +3,25 @@ import './calculator.css';
 import CalculatorButton from './CalculatorButton';
 import CalculatorDisplay from './CalculatorDisplay';
 
+export function handleInput(input: string, currentDisplay: string) {
+	switch (input) {
+		case 'C':
+			return '';
+		case '+/-':
+		case '%':
+		case '÷':
+		case '×':
+		case '-':
+		case '+':
+		case '.':
+		case '=':
+		case '0':
+		default:
+			// In this case "+" is the concatenation operator, not the addition operator
+			return(currentDisplay + input);
+	}
+}
+
 export default function CalculatorApp() {
 	// const [value, setter] = useState(initialValue)
 	const [displayValue, setDisplayValue] = useState('0');
@@ -13,23 +32,11 @@ export default function CalculatorApp() {
 	function handleButtonClick(buttonValue: string) {
 		console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
 
-		switch (buttonValue) {
-			case 'C':
-				setDisplayValue('');
-				break;
-			case '+/-':
-			case '%':
-			case '÷':
-			case '×':
-			case '-':
-			case '+':
-			case '.':
-			case '=':
-			case '0':
-			default:
-				// In this case "+" is the concatenation operator, not the addition operator
-				setDisplayValue(displayValue + buttonValue);
-		}
+		let nextDisplayValue = handleInput(buttonValue, displayValue);
+		// DO NOT DO THIS
+		// displayValue = handleInput(buttonValue, displayValue);
+
+		setDisplayValue(nextDisplayValue);
 	}
 
 	return (
