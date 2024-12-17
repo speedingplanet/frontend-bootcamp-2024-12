@@ -12,7 +12,26 @@ export default function CalculatorApp() {
 	// Callback, or event handler, or even a custom event handler
 	function handleButtonClick(buttonValue: string) {
 		console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
-		setDisplayValue(buttonValue);
+
+		/*
+		switch (buttonValue) {
+			case 'C':
+				setDisplayValue('');
+				break;
+			case '+/-':
+			case '%':
+			case '÷':
+			case '×':
+			case '-':
+			case '+':
+			case '.':
+			case '=':
+			case '0':
+			default:
+				// In this case "+" is the concatenation operator, not the addition operator
+				setDisplayValue(displayValue + buttonValue);
+		}
+				*/
 	}
 
 	return (
