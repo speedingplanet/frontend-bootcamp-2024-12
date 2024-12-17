@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from './BasicComponent.module.css';
+// import classes from './BasicComponent.module.css';
 
 function BasicComponent() {
 	const [favorite, setFavorite] = useState('');
@@ -11,6 +11,7 @@ function BasicComponent() {
 	return (
 		<div>
 			<div>
+				{/* <label for="some-id">Whatever</label> */}
 				<label htmlFor="favorite-fruit">Add your favorite fruit:</label>
 				<input
 					type="text"
@@ -22,7 +23,9 @@ function BasicComponent() {
 			</div>
 			<ul>
 				<li>Apples</li>
-				<li className={classes.bananas}>Bananas</li>
+				{/* <li class="clickable">Click me</li> */}
+				{/* <li className={classes.bananas}>Bananas</li> */}
+				<li>Bananas</li>
 				<li>Peaches</li>
 				<li data-testid="oranges">Oranges</li>
 				<li>{favorite}</li>
