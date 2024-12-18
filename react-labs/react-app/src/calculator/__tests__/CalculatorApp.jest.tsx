@@ -1,13 +1,40 @@
 import CalculatorApp from '../CalculatorApp';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import userEvent, { UserEvent } from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-it('should render the calculator', () => {
+let clearButton: HTMLElement;
+let fiveButton: HTMLElement;
+let sevenButton: HTMLElement;
+let displayDiv: HTMLElement;
+let user: UserEvent;
+
+beforeAll(() => {});
+
+// afterEach() -> Same thing, but AFTER each test
+beforeEach(() => {
+	// Works because we don't pass props into CalculatorApp
+	// A component that had different props per test would have to render in the individual tests
 	render(<CalculatorApp />);
 
-	// let clearButton = screen.getByText('C');
-	let clearButton = screen.getByRole('button', { name: 'C' });
+	// TODO: Maybe refactor to use an appropriate ARIA role for the display?
+	displayDiv = screen.getByTestId('display');
+
+	clearButton = screen.getByRole('button', { name: 'C' });
+	fiveButton = screen.getByRole('button', { name: '5' });
+	sevenButton = screen.getByRole('button', { name: '7' });
+
+	user = userEvent.setup();
+});
+
+afterEach(() => {});
+afterAll(() => {});
+
+/*
+beforeAll / afterAll, which runs only once, before or after ALL tests.
+*/
+
+it('should render the calculator', () => {
 	expect(clearButton).toBeInTheDocument();
 });
 
@@ -20,19 +47,12 @@ it('should clear the initial display when the "C" button is clicked', async () =
 	Check the display value, what should it be now?
 	*/
 
-	render(<CalculatorApp />);
-	let user = userEvent.setup();
-
-	// TODO: Maybe refactor to use an appropriate ARIA role for the display?
-	let displayDiv = screen.getByTestId('display');
 	expect(displayDiv.textContent).toBe('0');
-	let clearButton = screen.getByRole('button', {name: 'C'});
 	await user.click(clearButton);
 	expect(displayDiv.textContent).toBe('');
-
 });
 
-it('should update the display value when number keys are clicked', async  () => {
+it('should update the display value when number keys are clicked', async () => {
 	/*
 	Render CalculatorApp
 	Check the display value (how can we get that?), what should it be?
@@ -44,20 +64,14 @@ it('should update the display value when number keys are clicked', async  () => 
 	See if the display value updated
 	*/
 
-	render(<CalculatorApp />);
-	let user = userEvent.setup();
-	let displayDiv = screen.getByTestId('display');
 	expect(displayDiv.textContent).toBe('0');
-	let sevenButton = screen.getByRole('button', {name: '7'});
-	let fiveButton = screen.getByRole('button', {name: '5'});
 	await user.click(fiveButton);
 	expect(displayDiv.textContent).toBe('05');
 	await user.click(sevenButton);
 	expect(displayDiv.textContent).toBe('057');
-
 });
 
-it('should clear the display after the display has been updated, when the "C" button is clicked', () => {
+it('should clear the display after the display has been updated, when the "C" button is clicked', async () => {
 	/*
 	Render CalculatorApp
 	Check the display value (how can we get that?), what should it be?
@@ -71,4 +85,12 @@ it('should clear the display after the display has been updated, when the "C" bu
 	Click on the clear button
 	Check the display value, what should it be now?
 	*/
+
+	expect(displayDiv.textContent).toBe('0');
+	await user.click(fiveButton);
+	await user.click(sevenButton);
+	expect(displayDiv.textContent).toBe('057');
+
+	await user.click(clearButton);
+	expect(displayDiv.textContent).toBe('');
 });

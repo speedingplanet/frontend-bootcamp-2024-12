@@ -19,7 +19,7 @@ interface Props {
 
 export default function CalculatorButton({ display, className, onButtonClick }: Props) {
 	function handleClick() {
-		console.log(`CalculatorButton: You clicked the ${display} button`);
+		// console.log(`CalculatorButton: You clicked the ${display} button`);
 		if (onButtonClick) onButtonClick(display);
 	}
 

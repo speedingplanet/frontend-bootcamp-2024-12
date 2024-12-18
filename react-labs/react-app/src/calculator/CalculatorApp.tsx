@@ -30,7 +30,7 @@ export default function CalculatorApp() {
 
 	// Callback, or event handler, or even a custom event handler
 	function handleButtonClick(buttonValue: string) {
-		console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
+		// console.log(`CalculatorApp: You clicked on the ${buttonValue} button.`);
 
 		let nextDisplayValue = handleInput(buttonValue, displayValue);
 		// DO NOT DO THIS
