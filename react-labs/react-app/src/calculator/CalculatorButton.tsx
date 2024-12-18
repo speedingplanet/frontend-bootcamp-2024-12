@@ -12,7 +12,7 @@ CalculatorButton: The name of our function
 
 interface Props {
 	display: string;
-	className: string;
+	className?: string;
 	// A function with no arguments () and an ignored return value (void)
 	onButtonClick?: (display: string) => void;
 }
