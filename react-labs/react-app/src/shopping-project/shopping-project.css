@@ -1,0 +1,9 @@
+.shopping-navbar ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+}
+
+.shopping-navbar li {
+	margin-inline-end: 1em;
+}
