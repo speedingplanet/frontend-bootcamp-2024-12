@@ -11,13 +11,13 @@ function AsyncManager() {
 				<div className="col-3">
 					<ul className="list-unstyled">
 						<li>
-							<NavLink to="promises">Promises</NavLink>
+							<NavLink to="/async-demos/promises">Promises</NavLink>
 						</li>
 						<li>
-							<NavLink to="async-await">Async-await</NavLink>
+							<NavLink to="/async-demos/async-await">Async-await</NavLink>
 						</li>
 						<li>
-							<NavLink to="react-query">React Query</NavLink>
+							<NavLink to="/async-demos/react-query">React Query</NavLink>
 						</li>
 					</ul>
 				</div>
