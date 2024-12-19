@@ -15,7 +15,7 @@
 		"begin": "node scripts/setup.js begin",
 		"finish": "node scripts/setup.js finish",
 		"preview": "vite preview",
-		"server:rest": "json-server src/data/products.json --port 8000",
+		"server:rest": "json-server src/data/products.json --port 7500",
 		"jest": "jest --watch",
 		"jest:once": "jest",
 		"test": "vitest",
