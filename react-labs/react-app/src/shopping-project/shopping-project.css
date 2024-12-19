@@ -7,3 +7,36 @@
 .shopping-navbar li {
 	margin-inline-end: 1em;
 }
+
+.shopping-browser {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	height: 80vh;
+}
+
+.browser-header-row {
+	display: contents;
+}
+
+.browser-header-row > div, .browser-body-row > div {
+	display: grid;
+	grid-template-columns: subgrid;
+}
+
+.browser-header-row > div {
+border-bottom: 2px black solid;
+margin-bottom: 0.5em;
+}
+
+
+.browser-body-row {
+	display: contents;
+}
+
+/*
+.browser-header-row > div, .browser-body-row > div {
+	display: grid;
+	grid-template-columns: subgrid;
+}
+
+*/
