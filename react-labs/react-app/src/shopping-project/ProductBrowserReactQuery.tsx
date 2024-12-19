@@ -1,11 +1,24 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { generateProducts } from './generate-products';
+import { fetchAllProducts } from './shopping-dao';
 
 export const ProductBrowserReactQuery = () => {
-	let products = generateProducts(200);
+	const { isError, isPending, error, data: products } = useQuery({
+		queryKey: ['products'],
+		queryFn: fetchAllProducts,
+	});
+
+	if (isPending) {
+		return <span>Data loading....</span>
+	}
+
+	if (isError) {
+		return <span>Error: {error.message}</span>
+	}
+
 	return (
 		<>
-			<h3>Product Browser</h3>
+			<h3>Product Browser with React Query</h3>
 			<div className="shopping-browser">
 				<div className="browser-header-row">
 					<div>Name</div>

@@ -1,6 +1,8 @@
+import { Product } from "./shopping-types";
+
 let baseUrl = 'http://localhost:7500/products'
 
-export async function fetchAllProducts() {
+export async function fetchAllProducts(): Promise<Array<Product>> {
 	try {
 		let response = await fetch(baseUrl);
 		if (response.ok) {
@@ -11,5 +13,6 @@ export async function fetchAllProducts() {
 		}
 	} catch (error) {
 		console.error('Something went wrong with the DAO', error)
+		throw new Error('DAO Error');
 	}
 }
