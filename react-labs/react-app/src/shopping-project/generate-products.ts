@@ -34,8 +34,8 @@ export function generateToFile(count = 1, fileName = 'products.json') {
 
 	try {
 		fsExtra.writeJSONSync(path.join(__dirname, `../data/${fileName}`), { products }, { spaces: 2 });
-		console.log(`Finished writing products data to ${fileName}`)
+		console.log(`Finished writing products data to ${fileName}`);
 	} catch (error) {
-		console.error(`Could not write products to ${fileName} because `, error)
+		console.error(`Could not write products to ${fileName} because `, error);
 	}
 }

@@ -1,3 +1,3 @@
-import { generateToFile, generateProducts } from './generate-products';
+import { generateToFile } from './generate-products';
 
-console.log(generateToFile(100));
+generateToFile(100);
