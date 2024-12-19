@@ -17,5 +17,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
+	"exclude": ["src/shopping-project/create-project-data.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
