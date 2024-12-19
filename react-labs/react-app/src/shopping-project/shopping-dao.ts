@@ -1,6 +1,6 @@
 let baseUrl = 'http://localhost:7500/products'
 
-export async function getAllProducts() {
+export async function fetchAllProducts() {
 	try {
 		let response = await fetch(baseUrl);
 		if (response.ok) {

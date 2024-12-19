@@ -1,11 +1,24 @@
-import React from 'react';
-import { generateProducts } from './generate-products';
+import React, { useEffect, useState } from 'react';
+import { Product } from './shopping-types';
+import { fetchAllProducts } from './shopping-dao';
 
 export const ProductBrowserUseEffect = () => {
-	let products = generateProducts(200);
+	const [products, setProducts] = useState<Array<Product>>([]);
+
+	useEffect(() => {
+		const getData = async () => {
+			let products = await fetchAllProducts();
+			setProducts(products);
+		};
+
+		getData().catch((error) => {
+			console.error('DAO error handled at the UI level:', error);
+		});
+	}, []);
+
 	return (
 		<>
-			<h3>Product Browser</h3>
+			<h3>Product Browser w/useEffect</h3>
 			<div className="shopping-browser">
 				<div className="browser-header-row">
 					<div>Name</div>
