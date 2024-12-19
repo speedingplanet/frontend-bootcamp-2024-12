@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Country } from '../demo-types';
+import { fetchAllCountries } from './countries-dao';
 
 function AsyncAwait() {
 	const [countries, setCountries] = useState<Country[]>([]);
@@ -8,21 +9,14 @@ function AsyncAwait() {
 	// useEffect(function, dependencies[])
 	// Pass it a function to run and a list of dependencies
 	// One-time data request
-	useEffect(() => {
+ 	useEffect(() => {
 		async function getData() {
-			let url = 'http://localhost:8000/countries';
 			/*
 			Normally, async-await should be in a try-catch block, but we will
 			catch any errors externally to this function.
 			*/
-			let response = await fetch(url);
-
-			if (response.ok) {
-				let results = await response.json();
-				setCountries(results);
-			} else {
-				throw new Error(`Bad response: ${response.status}`);
-			}
+			let countries = await fetchAllCountries();
+			setCountries(countries);
 		}
 
 		// Errors are handled here
@@ -33,7 +27,7 @@ function AsyncAwait() {
 		return function () {
 			console.log('useEffect finished');
 		};
-	}, [refresh]);
+	}, [refresh]); // Empty dependencies fetches data once
 
 	return (
 		<div className="row">

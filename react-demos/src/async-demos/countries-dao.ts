@@ -18,6 +18,8 @@ function fetchAllCountriesPromise() {
 async function fetchAllCountries() {
 	try {
 		let response = await fetch(baseUrl);
+
+		// response.status >= 200 && <300
 		if (response.ok) {
 			let results = await response.json();
 			return results;
@@ -25,7 +27,7 @@ async function fetchAllCountries() {
 			throw Error(`Bad response: ${response.status}`);
 		}
 	} catch (error) {
-		console.error('countries-dao: Erorr:', error);
+		console.error('countries-dao: Error:', error);
 		throw error;
 	}
 }
