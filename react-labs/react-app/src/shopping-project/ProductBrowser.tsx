@@ -20,7 +20,7 @@ const ProductBrowser = ({products, onAddToCart}: Props) => {
 					<div>&nbsp;</div>
 				</div>
 				{products.map((product) => (
-					<ProductBrowserRow product={product} onAddToCart={onAddToCart} />
+					<ProductBrowserRow product={product} onAddToCart={onAddToCart} key={product.id} />
 				))}
 			</div>
 		</>
