@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { productsReducer, loadProducts } from './products-slice';
+// import { cartReducer } from './cart-slice';
+
+// Products data will eventually hook this up to an API
 import { products } from '../data/products.json';
-import { cartReducer } from './cart-slice';
+
 
 export const store = configureStore({
 	reducer: {
 		products: productsReducer,
-		cart: cartReducer
 	},
 });
 

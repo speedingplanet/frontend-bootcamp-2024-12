@@ -11,8 +11,6 @@ import { useAppSelector } from './hooks';
 export default function ShoppingApp() {
 	const [cart, setCart] = useState<Cart>(createCart());
 
-	const products = useAppSelector((state) => state.products);
-
 	function handleAddToCart(product: Product) {
 		let foundItem = cart.items.find((i) => product.id === i.product.id);
 		if (foundItem !== undefined) {
@@ -70,7 +68,6 @@ export default function ShoppingApp() {
 						path="/browse"
 						element={
 							<ProductBrowser
-								products={products}
 								onAddToCart={handleAddToCart}
 							/>
 						}

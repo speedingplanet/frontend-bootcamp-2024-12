@@ -1,12 +1,14 @@
+import { useAppSelector } from './hooks';
 import ProductBrowserRow from './ProductBrowserRow';
 import { Product } from './shopping-types';
 
 interface Props {
 	onAddToCart: (product: Product) => void;
-	products: Array<Product>
 }
 
-const ProductBrowser = ({products, onAddToCart}: Props) => {
+const ProductBrowser = ({ onAddToCart }: Props) => {
+	const products = useAppSelector((state) => state.products);
+
 	return (
 		<>
 			<h3>Product Browser</h3>
@@ -20,7 +22,11 @@ const ProductBrowser = ({products, onAddToCart}: Props) => {
 					<div>&nbsp;</div>
 				</div>
 				{products.map((product) => (
-					<ProductBrowserRow product={product} onAddToCart={onAddToCart} key={product.id} />
+					<ProductBrowserRow
+						product={product}
+						onAddToCart={onAddToCart}
+						key={product.id}
+					/>
 				))}
 			</div>
 		</>

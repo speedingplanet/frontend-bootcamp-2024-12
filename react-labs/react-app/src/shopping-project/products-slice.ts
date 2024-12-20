@@ -13,7 +13,6 @@ let productSlice = createSlice({
 	},
 });
 
-const { actions } = productSlice;
+const { actions, reducer } = productSlice;
 export const { loadProducts } = actions;
-const productsReducer = productSlice.reducer;
-export { productsReducer };
+export { reducer as productsReducer };
