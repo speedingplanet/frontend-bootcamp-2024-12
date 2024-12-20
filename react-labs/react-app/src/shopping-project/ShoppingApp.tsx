@@ -23,6 +23,8 @@ export default function ShoppingApp() {
 		});
 	}, []);
 
+	console.log('Items in cart: ', cart.items.length)
+
 	function handleAddToCart(product: Product) {
 		cart.items.push({ product, quantity: 1 });
 		setCart({ ...cart });

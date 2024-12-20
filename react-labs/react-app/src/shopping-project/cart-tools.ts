@@ -24,7 +24,13 @@ let defaultCart: Cart = {
 };
 
 export function createCart(item?: CartItem): Cart {
-	return { ...defaultCart, items: item ? [item] : [] };
+	// Make a copy of the default cart:
+	let cart: Cart = {...defaultCart, items: []};
+	if (item) cart.items.push(item);
+	return cart;
+
+	// As a one-liner
+	// return { ...defaultCart, items: item ? [item] : [] };
 }
 
 export function addItem(cart: Cart, item: CartItem) {
