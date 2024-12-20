@@ -1,0 +1,43 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
+    "codegen:watch": "graphql-codegen --watch --config codegen.ts",
+    "compile": "tsc --declaration",
+    "compile:full": "npm run codegen && npm run compile",
+    "compile:watch": "tsc --declaration --watch",
+    "start": "npm run compile && node ./dist/src/index.js",
+    "start:watch": "nodemon ./dist/src/index.js",
+    "test": "mocha",
+    "watch-all": "concurrently \"npm:codegen:watch\" \"npm:compile:watch\" \"npm:start:watch\" "
+  },
+  "keywords": [],
+  "author": "John Paxton <pax@speedingplanet.com>",
+  "type": "module",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "graphql": "^16.10.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/introspection": "^4.0.3",
+    "@graphql-codegen/typescript": "^4.1.2",
+    "@graphql-codegen/typescript-resolvers": "^4.4.1",
+    "@types/chai": "^5.0.1",
+    "@types/lodash": "^4.17.13",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.2",
+    "chai": "^5.1.2",
+    "concurrently": "^9.1.0",
+    "mocha": "^11.0.1",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
