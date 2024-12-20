@@ -4,7 +4,7 @@ import DisplayShoppingCart from './DisplayShoppingCart';
 import ProductBrowser from './ProductBrowser';
 import { useEffect, useState } from 'react';
 import { fetchAllProducts } from './shopping-dao';
-import { Cart, Product } from './shopping-types';
+import { Cart, CartItem, Product, QuantityChange } from './shopping-types';
 import { createCart } from './cart-tools';
 import ShowCartLink from './ShowCartLink';
 
@@ -23,11 +23,31 @@ export default function ShoppingApp() {
 		});
 	}, []);
 
-	console.log('Items in cart: ', cart.items.length)
+	console.log('Items in cart: ', cart.items.length);
 
 	function handleAddToCart(product: Product) {
-		cart.items.push({ product, quantity: 1 });
+		let foundItem = cart.items.find((i) => product.id === i.product.id);
+		if (foundItem !== undefined) {
+			foundItem.quantity = foundItem.quantity + 1;
+		} else {
+			cart.items.push({ product, quantity: 1 });
+		}
+
 		setCart({ ...cart });
+	}
+
+	function handleChangeQuantity(direction: QuantityChange, item: CartItem) {
+		let foundCartItem = cart.items.find((i) => i.product.id === item.product.id);
+
+		if (foundCartItem === undefined) return;
+
+		if (direction === 'add') {
+			foundCartItem.quantity += 1;
+		} else if (direction === 'subtract' && foundCartItem.quantity > 0) {
+			foundCartItem.quantity -= 1;
+		}
+
+		setCart({...cart});
 	}
 
 	return (
@@ -51,7 +71,7 @@ export default function ShoppingApp() {
 				<Routes>
 					<Route
 						path="/cart"
-						element={<DisplayShoppingCart />}
+						element={<DisplayShoppingCart cart={cart} onChangeQuantity={handleChangeQuantity} />}
 					/>
 					<Route
 						path="/browse"

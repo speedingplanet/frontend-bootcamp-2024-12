@@ -22,3 +22,4 @@ export interface CartItem {
 }
 
 export type CartStatus = 'Pending' | 'Saved' | 'Checked-out';
+export type QuantityChange = 'add' | 'subtract';

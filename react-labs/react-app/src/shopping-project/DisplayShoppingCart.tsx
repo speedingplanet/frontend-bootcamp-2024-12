@@ -1,7 +1,27 @@
-import React from 'react'
+import React from 'react';
+import { Cart, CartItem, QuantityChange } from './shopping-types';
+import DisplayShoppingCartItem from './DisplayShoppingCartItem';
 
-export default function DisplayShoppingCart() {
+interface Props {
+	cart: Cart;
+	onChangeQuantity: (direction: QuantityChange, item: CartItem) => void;
+}
+
+export default function DisplayShoppingCart({ cart, onChangeQuantity }: Props) {
+	if (cart.items.length === 0) return <span>Your cart is empty!</span>;
+
+	/*
+	Iterate over the items in the cart and display them
+	*/
 	return (
-		<h3>Display Shopping Cart</h3>
-	)
+		<section>
+			{cart.items.map((i) => (
+				<DisplayShoppingCartItem
+					onChangeQuantity={onChangeQuantity}
+					item={i}
+					key={i.product.id + '|' + i.quantity}
+				/>
+			))}
+		</section>
+	);
 }
