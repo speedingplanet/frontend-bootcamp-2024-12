@@ -10,7 +10,7 @@ const ProductBrowser = ({products, onAddToCart}: Props) => {
 	return (
 		<>
 			<h3>Product Browser</h3>
-			<p>Plain React for state management, <code>useEffect</code> for fetching data</p>
+			<p>Redux for state management</p>
 			<div className="shopping-browser">
 				<div className="browser-header-row">
 					<div>Name</div>

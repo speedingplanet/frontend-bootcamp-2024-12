@@ -5,7 +5,7 @@ let productSlice = createSlice({
 	initialState: [],
 	reducers: {
 		loadProducts: (state, action) => {
-			state = action.payload;
+			return action.payload;
 		},
 	},
 });

@@ -6,6 +6,8 @@ import LabManager from './labs/LabManager';
 import ZipPayManager from './zippay/ZipPayManager';
 import CalculatorApp from './calculator/CalculatorApp';
 import ShoppingApp from './shopping-project/ShoppingApp';
+import { Provider } from 'react-redux';
+import { store } from './shopping-project/configure-store';
 
 function App() {
 	return (
@@ -50,7 +52,7 @@ function App() {
 					/>
 					<Route
 						path="shopping/*"
-						element={<ShoppingApp />}
+						element={<Provider store={store}><ShoppingApp /></Provider>}
 					/>
 				</Routes>
 			</BrowserRouter>
