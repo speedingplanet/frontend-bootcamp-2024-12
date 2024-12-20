@@ -10,17 +10,26 @@
 
 .shopping-browser {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	height: 80vh;
+	grid-template-columns: repeat(5, 1fr);
+	height: 70vh;
+	overflow-y: scroll;
 }
 
 .browser-header-row {
 	display: contents;
 }
 
+.browser-body-row:nth-child(odd) > div {
+	background-color: lightblue;
+}
+
 .browser-header-row > div, .browser-body-row > div {
 	display: grid;
 	grid-template-columns: subgrid;
+}
+
+.browser-body-row > div {
+	padding: 0.4em 0;
 }
 
 .browser-header-row > div {

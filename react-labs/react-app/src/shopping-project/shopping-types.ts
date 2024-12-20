@@ -12,8 +12,7 @@ export interface Cart {
 	id: string;
 	customerId: string;
 	cartStatus: CartStatus;
-	isEmpty: boolean;
-	products: CartItem[];
+	items: CartItem[];
 	totalPrice: number;
 }
 
