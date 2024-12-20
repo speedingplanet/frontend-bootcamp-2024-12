@@ -21,4 +21,16 @@ describe('ShoppingApp', () => {
 	it('should render', () => {
 		render(<RoutedShoppingApp initialEntries={['/shopping']} />);
 	});
+
+	it('should update the cart text when "Add to cart" is clicked', async () => {
+		render(<RoutedShoppingApp initialEntries={['/shopping/browse']} />);
+		let cartText = screen.getByText('Cart');
+		let user = userEvent.setup();
+
+		// Use findAll because the rows are loaded asynchronously
+		let buttons = await screen.findAllByRole('button', {name: /cart/})
+		await user.click(buttons[0]);
+		expect(cartText.textContent).toEqual('Cart (1)')
+
+	})
 });
