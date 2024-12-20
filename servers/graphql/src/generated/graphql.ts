@@ -25,6 +25,21 @@ export type Address = {
   street?: Maybe<Scalars['String']['output']>;
 };
 
+export type Cart = {
+  __typename?: 'Cart';
+  cartStatus?: Maybe<Scalars['String']['output']>;
+  customerId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<CartItem>>>;
+  totalPrice?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CartItem = {
+  __typename?: 'CartItem';
+  product?: Maybe<Product>;
+  quantity?: Maybe<Scalars['Int']['output']>;
+};
+
 export type Class = {
   __typename?: 'Class';
   course?: Maybe<Course>;
@@ -96,6 +111,17 @@ export type Instructor = {
   province?: Maybe<Scalars['String']['output']>;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  department?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  material?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['Float']['output']>;
+  rating?: Maybe<Scalars['Float']['output']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   classes?: Maybe<Array<Maybe<Class>>>;
@@ -104,6 +130,7 @@ export type Query = {
   departments?: Maybe<Array<Maybe<Department>>>;
   hello?: Maybe<Scalars['String']['output']>;
   instructors?: Maybe<Array<Maybe<Instructor>>>;
+  products?: Maybe<Array<Maybe<Product>>>;
   registrations?: Maybe<Array<Maybe<Registration>>>;
   rooms?: Maybe<Array<Maybe<Room>>>;
   studentById?: Maybe<Student>;
@@ -272,6 +299,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Address: ResolverTypeWrapper<Address>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Cart: ResolverTypeWrapper<Cart>;
+  CartItem: ResolverTypeWrapper<CartItem>;
   Class: ResolverTypeWrapper<Class>;
   Country: ResolverTypeWrapper<Country>;
   Course: ResolverTypeWrapper<Course>;
@@ -279,6 +308,7 @@ export type ResolversTypes = {
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   Instructor: ResolverTypeWrapper<Instructor>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Product: ResolverTypeWrapper<Product>;
   Query: ResolverTypeWrapper<{}>;
   Registration: ResolverTypeWrapper<Registration>;
   Room: ResolverTypeWrapper<Room>;
@@ -293,6 +323,8 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Address: Address;
   Boolean: Scalars['Boolean']['output'];
+  Cart: Cart;
+  CartItem: CartItem;
   Class: Class;
   Country: Country;
   Course: Course;
@@ -300,6 +332,7 @@ export type ResolversParentTypes = {
   Float: Scalars['Float']['output'];
   Instructor: Instructor;
   Int: Scalars['Int']['output'];
+  Product: Product;
   Query: {};
   Registration: Registration;
   Room: Room;
@@ -316,6 +349,21 @@ export type AddressResolvers<ContextType = any, ParentType extends ResolversPare
   postalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   province?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   street?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
+  cartStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  customerId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  items?: Resolver<Maybe<Array<Maybe<ResolversTypes['CartItem']>>>, ParentType, ContextType>;
+  totalPrice?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartItemResolvers<ContextType = any, ParentType extends ResolversParentTypes['CartItem'] = ResolversParentTypes['CartItem']> = {
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
+  quantity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -390,6 +438,17 @@ export type InstructorResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  department?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  material?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  rating?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   classes?: Resolver<Maybe<Array<Maybe<ResolversTypes['Class']>>>, ParentType, ContextType>;
   countries?: Resolver<Maybe<Array<Maybe<ResolversTypes['Country']>>>, ParentType, ContextType>;
@@ -397,6 +456,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   departments?: Resolver<Maybe<Array<Maybe<ResolversTypes['Department']>>>, ParentType, ContextType>;
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<QueryHelloArgs>>;
   instructors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Instructor']>>>, ParentType, ContextType>;
+  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   registrations?: Resolver<Maybe<Array<Maybe<ResolversTypes['Registration']>>>, ParentType, ContextType>;
   rooms?: Resolver<Maybe<Array<Maybe<ResolversTypes['Room']>>>, ParentType, ContextType>;
   studentById?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType, RequireFields<QueryStudentByIdArgs, 'id'>>;
@@ -449,11 +509,14 @@ export type Studentv1Resolvers<ContextType = any, ParentType extends ResolversPa
 
 export type Resolvers<ContextType = any> = {
   Address?: AddressResolvers<ContextType>;
+  Cart?: CartResolvers<ContextType>;
+  CartItem?: CartItemResolvers<ContextType>;
   Class?: ClassResolvers<ContextType>;
   Country?: CountryResolvers<ContextType>;
   Course?: CourseResolvers<ContextType>;
   Department?: DepartmentResolvers<ContextType>;
   Instructor?: InstructorResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Registration?: RegistrationResolvers<ContextType>;
   Room?: RoomResolvers<ContextType>;

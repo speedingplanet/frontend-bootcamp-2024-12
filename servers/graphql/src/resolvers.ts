@@ -9,6 +9,7 @@ import {
 	rooms,
 } from './data/all-data-typed.js';
 import { countries } from './data/countries-table-typed.js';
+import {carts, products} from './data/products.js';
 
 export const resolvers: Resolvers = {
 	Query: {
@@ -29,6 +30,10 @@ export const resolvers: Resolvers = {
 			*/
 			let firstName = args.firstName ?? 'everyone';
 			return `Hi ${firstName}!`;
+		},
+
+		products() {
+			return products;
 		},
 
 		countries() {

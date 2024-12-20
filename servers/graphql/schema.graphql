@@ -5,6 +5,7 @@ type Query {
 	# hello(firstName: String): String
 	hello(firstName: String): String
 	countries: [Country]
+	products: [Product]
 	students(country: String): [Student]
 	studentsWithFilter(filter: StudentOptional!): [Student]!
 	studentById(id: Int!): Student
@@ -141,6 +142,29 @@ type Country {
 	worldPercentage: Float
 	density: Float
 	densityMi: Float
+}
+
+type Product {
+	id: String
+	name: String
+	price: Float
+	description: String
+	material: String
+	department: String
+	rating: Float
+}
+
+type CartItem {
+	product: Product
+	quantity: Int
+}
+
+type Cart {
+	id: String
+	customerId: String
+	cartStatus: String
+	items: [CartItem]
+	totalPrice: Float
 }
 
 input StudentOptional {
