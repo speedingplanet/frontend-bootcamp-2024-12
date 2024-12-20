@@ -4,10 +4,13 @@ import DisplayShoppingCart from './DisplayShoppingCart';
 import ProductBrowser from './ProductBrowser';
 import { useEffect, useState } from 'react';
 import { fetchAllProducts } from './shopping-dao';
-import { Product } from './shopping-types';
+import { Cart, Product } from './shopping-types';
+import { createCart } from './cart-tools';
+import ShowCartLink from './ShowCartLink';
 
 export default function ShoppingApp() {
 	const [products, setProducts] = useState<Array<Product>>([]);
+	const [cart, setCart] = useState<Cart>(createCart());
 
 	useEffect(() => {
 		const getData = async () => {
@@ -20,7 +23,10 @@ export default function ShoppingApp() {
 		});
 	}, []);
 
-	function handleAddToCart(product: Product) {}
+	function handleAddToCart(product: Product) {
+		cart.items.push({ product, quantity: 1 });
+		setCart({ ...cart });
+	}
 
 	return (
 		<section>
@@ -30,7 +36,9 @@ export default function ShoppingApp() {
 			<nav className="shopping-navbar">
 				<ul>
 					<li>
-						<NavLink to="/shopping/cart">Cart</NavLink>
+						<NavLink to="/shopping/cart">
+							<ShowCartLink cart={cart} />
+						</NavLink>
 					</li>
 					<li>
 						<NavLink to="/shopping/browse">Browse Products</NavLink>
@@ -40,12 +48,17 @@ export default function ShoppingApp() {
 			<section>
 				<Routes>
 					<Route
-						path="cart"
+						path="/cart"
 						element={<DisplayShoppingCart />}
 					/>
 					<Route
-						path="browse"
-						element={<ProductBrowser products={products} onAddToCart={handleAddToCart}/>}
+						path="/browse"
+						element={
+							<ProductBrowser
+								products={products}
+								onAddToCart={handleAddToCart}
+							/>
+						}
 					/>
 				</Routes>
 			</section>

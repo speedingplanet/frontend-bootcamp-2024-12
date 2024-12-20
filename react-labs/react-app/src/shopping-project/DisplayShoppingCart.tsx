@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function ShoppingCart() {
+export default function DisplayShoppingCart() {
 	return (
-		<h3>Shopping Cart</h3>
+		<h3>Display Shopping Cart</h3>
 	)
 }
