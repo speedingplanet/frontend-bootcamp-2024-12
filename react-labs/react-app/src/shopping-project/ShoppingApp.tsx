@@ -2,39 +2,11 @@ import './shopping-project.css';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import DisplayShoppingCart from './DisplayShoppingCart';
 import ProductBrowser from './ProductBrowser';
-import { useState } from 'react';
-import { Cart, CartItem, Product, QuantityChange } from './shopping-types';
-import { createCart } from './cart-tools';
 import ShowCartLink from './ShowCartLink';
 import { useAppSelector } from './hooks';
 
 export default function ShoppingApp() {
-	const [cart, setCart] = useState<Cart>(createCart());
-
-	function handleAddToCart(product: Product) {
-		let foundItem = cart.items.find((i) => product.id === i.product.id);
-		if (foundItem !== undefined) {
-			foundItem.quantity = foundItem.quantity + 1;
-		} else {
-			cart.items.push({ product, quantity: 1 });
-		}
-
-		setCart({ ...cart });
-	}
-
-	function handleChangeQuantity(direction: QuantityChange, item: CartItem) {
-		let foundCartItem = cart.items.find((i) => i.product.id === item.product.id);
-
-		if (foundCartItem === undefined) return;
-
-		if (direction === 'add') {
-			foundCartItem.quantity += 1;
-		} else if (direction === 'subtract' && foundCartItem.quantity > 0) {
-			foundCartItem.quantity -= 1;
-		}
-
-		setCart({ ...cart });
-	}
+	const cart = useAppSelector((state) => state.cart);
 
 	return (
 		<section>
@@ -58,18 +30,13 @@ export default function ShoppingApp() {
 					<Route
 						path="/cart"
 						element={
-							<DisplayShoppingCart
-								cart={cart}
-								onChangeQuantity={handleChangeQuantity}
-							/>
+							<DisplayShoppingCart />
 						}
 					/>
 					<Route
 						path="/browse"
 						element={
-							<ProductBrowser
-								onAddToCart={handleAddToCart}
-							/>
+							<ProductBrowser />
 						}
 					/>
 				</Routes>

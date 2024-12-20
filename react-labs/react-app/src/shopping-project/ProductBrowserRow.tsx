@@ -1,12 +1,15 @@
 import React from 'react';
 import { Product } from './shopping-types';
+import { useAppDispatch } from './hooks';
+import { addToCart } from './cart-slice';
 
 interface Props {
 	product: Product;
-	onAddToCart: (product: Product) => void;
 }
 
-export default function ProductBrowserRow({ product, onAddToCart }: Props) {
+export default function ProductBrowserRow({ product }: Props) {
+	const dispatch = useAppDispatch();
+
 	return (
 		<div
 			className="browser-body-row"
@@ -19,7 +22,7 @@ export default function ProductBrowserRow({ product, onAddToCart }: Props) {
 			<div>
 				<button
 					type="button"
-					onClick={() => onAddToCart(product)}
+					onClick={() => dispatch(addToCart(product))}
 				>
 					Add To Cart
 				</button>

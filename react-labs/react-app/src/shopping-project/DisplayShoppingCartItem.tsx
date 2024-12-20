@@ -1,12 +1,15 @@
 import React from 'react';
-import { CartItem, QuantityChange } from './shopping-types';
+import { CartItem } from './shopping-types';
+import { useAppDispatch } from './hooks';
+import { changeItemQuantity } from './cart-slice';
 
 interface Props {
 	item: CartItem;
-	onChangeQuantity: (direction: QuantityChange, item: CartItem) => void;
 }
 
-export default function DisplayShoppingCartItem({ item, onChangeQuantity }: Props) {
+export default function DisplayShoppingCartItem({ item }: Props) {
+	let dispatch = useAppDispatch();
+
 	return (
 		<div className="shopping-cart-item">
 			<ul>
@@ -19,13 +22,13 @@ export default function DisplayShoppingCartItem({ item, onChangeQuantity }: Prop
 					<span>
 						<button
 							type="button"
-							onClick={() => onChangeQuantity('add', item)}
+							onClick={() => dispatch(changeItemQuantity({ direction: 'add', item }))}
 						>
 							➕
 						</button>
 						<button
 							type="button"
-							onClick={() => onChangeQuantity('subtract', item)}
+							onClick={() => dispatch(changeItemQuantity({ direction: 'subtract', item }))}
 						>
 							➖
 						</button>
