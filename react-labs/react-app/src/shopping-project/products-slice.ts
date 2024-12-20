@@ -1,10 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Product } from './shopping-types';
+
+let initialState: Array<Product> = []
 
 let productSlice = createSlice({
 	name: 'products',
-	initialState: [],
+	initialState,
 	reducers: {
-		loadProducts: (state, action) => {
+		loadProducts: (state, action: PayloadAction<Array<Product>>) => {
 			return action.payload;
 		},
 	},

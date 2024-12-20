@@ -13,7 +13,7 @@ export interface Cart {
 	customerId: string;
 	cartStatus: CartStatus;
 	items: CartItem[];
-	totalPrice: number;
+	totalPrice?: number;
 }
 
 export interface CartItem {

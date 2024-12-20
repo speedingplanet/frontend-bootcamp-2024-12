@@ -1,11 +1,13 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { productsReducer, loadProducts } from './products-slice';
 import { products } from '../data/products.json';
+import { cartReducer } from './cart-slice';
 
 export const store = configureStore({
-	reducer: combineReducers({
+	reducer: {
 		products: productsReducer,
-	}),
+		cart: cartReducer
+	},
 });
 
 store.dispatch(loadProducts(products));
