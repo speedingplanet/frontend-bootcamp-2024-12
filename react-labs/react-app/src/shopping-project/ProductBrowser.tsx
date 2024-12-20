@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Product } from './shopping-types';
-import { fetchAllProducts } from './shopping-dao';
 
-const ProductBrowser = () => {
-	const [products, setProducts] = useState<Array<Product>>([]);
+interface Props {
+	onAddToCart: (product: Product) => void;
+	products: Array<Product>
+}
 
-	useEffect(() => {
-		const getData = async () => {
-			let products = await fetchAllProducts();
-			setProducts(products);
-		};
-
-		getData().catch((error) => {
-			console.error('DAO error handled at the UI level:', error);
-		});
-	}, []);
-
+const ProductBrowser = ({products, onAddToCart}: Props) => {
 	return (
 		<>
 			<h3>Product Browser</h3>
@@ -37,7 +27,7 @@ const ProductBrowser = () => {
 						<div>{product.price}</div>
 						<div>{product.material}</div>
 						<div>{product.department}</div>
-						<div><button type="button" className="btn btn-danger">Add to cart</button></div>
+						<div><button type="button" className="btn btn-danger" onClick={() => onAddToCart(product)}>Add to cart</button></div>
 					</div>
 				))}
 			</div>
