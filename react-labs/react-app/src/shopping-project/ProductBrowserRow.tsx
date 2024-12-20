@@ -3,10 +3,10 @@ import { Product } from './shopping-types';
 
 interface Props {
 	product: Product;
-	onButtonClick: (product: Product) => void;
+	onAddToCart: (product: Product) => void;
 }
 
-export default function ProductBrowserRow({ product, onButtonClick }: Props) {
+export default function ProductBrowserRow({ product, onAddToCart }: Props) {
 	return (
 		<div
 			className="browser-body-row"
@@ -19,7 +19,7 @@ export default function ProductBrowserRow({ product, onButtonClick }: Props) {
 			<div>
 				<button
 					type="button"
-					onClick={() => onButtonClick(product)}
+					onClick={() => onAddToCart(product)}
 				>
 					Add To Cart
 				</button>

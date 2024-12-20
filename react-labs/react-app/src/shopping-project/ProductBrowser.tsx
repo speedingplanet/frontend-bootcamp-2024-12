@@ -1,3 +1,4 @@
+import ProductBrowserRow from './ProductBrowserRow';
 import { Product } from './shopping-types';
 
 interface Props {
@@ -19,16 +20,7 @@ const ProductBrowser = ({products, onAddToCart}: Props) => {
 					<div>&nbsp;</div>
 				</div>
 				{products.map((product) => (
-					<div
-						className="browser-body-row"
-						key={product.id}
-					>
-						<div>{product.name}</div>
-						<div>{product.price}</div>
-						<div>{product.material}</div>
-						<div>{product.department}</div>
-						<div><button type="button" className="btn btn-danger" onClick={() => onAddToCart(product)}>Add to cart</button></div>
-					</div>
+					<ProductBrowserRow product={product} onAddToCart={onAddToCart} />
 				))}
 			</div>
 		</>
