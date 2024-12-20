@@ -7,6 +7,8 @@ import { fetchAllProducts } from './shopping-dao';
 import { Cart, CartItem, Product, QuantityChange } from './shopping-types';
 import { createCart } from './cart-tools';
 import ShowCartLink from './ShowCartLink';
+import { store } from './configure-store';
+import { Provider } from 'react-redux';
 
 export default function ShoppingApp() {
 	const [products, setProducts] = useState<Array<Product>>([]);
@@ -22,8 +24,6 @@ export default function ShoppingApp() {
 			console.error('DAO error handled at the UI level:', error);
 		});
 	}, []);
-
-	console.log('Items in cart: ', cart.items.length);
 
 	function handleAddToCart(product: Product) {
 		let foundItem = cart.items.find((i) => product.id === i.product.id);
@@ -47,43 +47,50 @@ export default function ShoppingApp() {
 			foundCartItem.quantity -= 1;
 		}
 
-		setCart({...cart});
+		setCart({ ...cart });
 	}
 
 	return (
-		<section>
-			<header>
-				<h1>Unnamed Shopping App</h1>
-			</header>
-			<nav className="shopping-navbar">
-				<ul>
-					<li>
-						<NavLink to="/shopping/cart">
-							<ShowCartLink cart={cart} />
-						</NavLink>
-					</li>
-					<li>
-						<NavLink to="/shopping/browse">Browse Products</NavLink>
-					</li>
-				</ul>
-			</nav>
+		<Provider store={store}>
 			<section>
-				<Routes>
-					<Route
-						path="/cart"
-						element={<DisplayShoppingCart cart={cart} onChangeQuantity={handleChangeQuantity} />}
-					/>
-					<Route
-						path="/browse"
-						element={
-							<ProductBrowser
-								products={products}
-								onAddToCart={handleAddToCart}
-							/>
-						}
-					/>
-				</Routes>
+				<header>
+					<h1>Unnamed Shopping App</h1>
+				</header>
+				<nav className="shopping-navbar">
+					<ul>
+						<li>
+							<NavLink to="/shopping/cart">
+								<ShowCartLink cart={cart} />
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to="/shopping/browse">Browse Products</NavLink>
+						</li>
+					</ul>
+				</nav>
+				<section>
+					<Routes>
+						<Route
+							path="/cart"
+							element={
+								<DisplayShoppingCart
+									cart={cart}
+									onChangeQuantity={handleChangeQuantity}
+								/>
+							}
+						/>
+						<Route
+							path="/browse"
+							element={
+								<ProductBrowser
+									products={products}
+									onAddToCart={handleAddToCart}
+								/>
+							}
+						/>
+					</Routes>
+				</section>
 			</section>
-		</section>
+		</Provider>
 	);
 }
