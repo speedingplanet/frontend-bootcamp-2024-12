@@ -27,6 +27,16 @@ export interface Country {
 	id: number;
 }
 
+export interface Product {
+	id: string;
+	name: string;
+	price: number;
+	description: string;
+	material: string;
+	department: string;
+	rating: number
+}
+
 export interface GridColumn<T> {
 	field: keyof T;
 	label: string;
